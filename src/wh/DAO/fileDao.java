@@ -169,4 +169,46 @@ public class fileDao extends baseDao{
 		close();
 		return al;
 	}
+
+	public boolean notfind(String tid) throws SQLException {
+		// TODO Auto-generated method stub
+		boolean flag=true;
+		start();
+		String sql="select * from whmanage where tecid=?";
+		ps=conn.prepareStatement(sql);
+		ps.setString(1, tid);
+		
+		
+		rs=ps.executeQuery();
+		
+		while(rs.next()){
+			flag=false;
+			
+		}
+		
+		close();
+		return flag;
+	}
+
+	public boolean match(String tid, String tnum) throws SQLException {
+		// TODO Auto-generated method stub
+		boolean flag=false;
+		start();
+		String sql="select * from  whmanage where tecid=? and tecnum=?";
+		ps=conn.prepareStatement(sql);
+		ps.setString(1, tid);
+		ps.setString(2, tnum);
+		
+		
+		rs=ps.executeQuery();
+		
+		while(rs.next()){
+			flag=true;
+			
+			
+		}
+		
+		close();
+		return flag;
+	}
 }

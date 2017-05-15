@@ -5,9 +5,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +20,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import wh.DAO.fileDao;
+import wh.module.add;
 
 public class WhaddUI {
 	JFrame jf=new JFrame("添加工时");
@@ -101,21 +108,12 @@ public class WhaddUI {
     jbadd.setFont(new Font("宋体",Font.BOLD,20));
     jbadd.setText("添加");
     jbadd.setBounds(icon.getIconWidth()/2, icon.getIconHeight()/6+(height*9), jtwidth, height);
-    jbadd.addActionListener(new ActionListener(){
+    jbadd.addActionListener(new jbaddHandler());
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			//添加事件
-			String tid=jtftid.getText();
-			String tnum=jtftnum.getText();
-			String snum=jtfnum.getText();
-			String ws=cws.getSelectedItem();
-			JOptionPane.showMessageDialog(null, ws, "alert", JOptionPane.ERROR_MESSAGE); 
-			
-		}
+		
+		
     	
-    });
+    
     	jp.add(jltid);
     	jp.add(jtftid);
     	jp.add(jltnum);
@@ -134,6 +132,66 @@ public class WhaddUI {
     
     
 	}
+	
+	
+	protected boolean match(String tid, String tnum) throws SQLException {
+		// TODO Auto-generated method stub
+		boolean flag=false;
+		fileDao dao=new fileDao();
+		flag=dao.match(tid,tnum);
+		return flag;
+	}
+
+
+	protected boolean notfind(String tid) throws SQLException {
+		// TODO Auto-generated method stub
+		fileDao dao=new fileDao();
+		boolean flag=true;
+		flag=dao.notfind(tid);
+		return flag;
+	}
+
+
+	public boolean isNumeric(String str){ 
+		   Pattern pattern = Pattern.compile("[0-9]*"); 
+		   Matcher isNum = pattern.matcher(str);
+		   if( !isNum.matches() ){
+		       return false; 
+		   } 
+		   return true; 
+		}
+	 private class jbaddHandler implements ActionListener{
+			// TODO Auto-generated method stub
+			//添加事件
+		 public void actionPerformed(ActionEvent e){
+				try {
+					String tid=jtftid.getText();
+					String tnum=jtftnum.getText();
+					String snum=jtfnum.getText();
+					String ws=cws.getSelectedItem();
+					int num=0;
+					add ad=new add();
+					if(notfind(tid)==true){
+					JOptionPane.showMessageDialog(null,"图号有误","警告" , JOptionPane.INFORMATION_MESSAGE); 
+					} else if(isNumeric(snum)!=true){
+						JOptionPane.showMessageDialog(null, "请确数量是否正确", "警告", JOptionPane.INFORMATION_MESSAGE);
+					}else if(isNumeric(snum)!=true){
+						num=Integer.valueOf(snum);
+					}else if(match(tid,tnum)!=true){
+						
+						JOptionPane.showMessageDialog(null, "图中没有此工序，请添加","警告" , JOptionPane.INFORMATION_MESSAGE);
+					}else if(ad.addcount(tid, tnum, num, ws)==true){
+						JOptionPane.showMessageDialog(null, "成功", "添加成功！", JOptionPane.INFORMATION_MESSAGE); 
+						System.out.println("add success-------------------------------");
+					}else {
+						JOptionPane.showMessageDialog(null, "错误", "错误未知", JOptionPane.INFORMATION_MESSAGE); 
+					}
+				} catch (HeadlessException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		}
+	 }
 	public static void main(String[] args){
 		new WhaddUI();
 	}
