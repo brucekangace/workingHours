@@ -211,4 +211,24 @@ public class fileDao extends baseDao{
 		close();
 		return flag;
 	}
+
+	public ArrayList<whManage> getwhm() throws SQLException {
+		// TODO Auto-generated method stub
+		ArrayList<whManage> arr=new ArrayList<whManage>();
+		start();
+		
+		String sql="select * from whmanage";
+		ps=conn.prepareStatement(sql);
+		rs=ps.executeQuery();
+		while(rs.next()){
+			whManage w=new whManage();
+			w.setTecid(rs.getString("tecid"));
+			w.setTecnum(rs.getString("tecnum"));
+			w.setTecname(rs.getString("tecname"));
+			w.setWhquote(rs.getFloat("whquota"));
+			arr.add(w);
+		}
+		close();
+		return arr;
+	}
 }

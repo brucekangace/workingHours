@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 
 import wh.DAO.fileDao;
 import wh.module.add;
-
+//添加工时界面
 public class WhaddUI {
 	JFrame jf=new JFrame("添加工时");
 	JPanel jp;

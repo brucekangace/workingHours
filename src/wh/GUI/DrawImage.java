@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 import wh.module.login;
-
+//µÇÂ¼½çÃæ
 public class DrawImage { 
 	JFrame jframe;
 	JButton bt=new JButton();
