@@ -46,10 +46,14 @@ public class DrawImage {
  				log=lg.loginwh(username, pwd);
 				if(log==0)
 					JOptionPane.showMessageDialog(jframe,"密码与用户名不匹配");
-					else if(log==1)
+					else if(log==1){
 						JOptionPane.showMessageDialog(jframe,"管理员你好");
-						else if(log==2)
-							JOptionPane.showMessageDialog(jframe,"用户你好");
+						
+					}else if(log==2){
+							//JOptionPane.showMessageDialog(jframe,"用户你好");
+							ULogSucssUI us=new ULogSucssUI();
+							jframe.setVisible(false);
+						}
 							else
 								JOptionPane.showMessageDialog(jframe,"未知错误");
 				
@@ -136,9 +140,9 @@ public class DrawImage {
 	
 	 	
 	
-	/*public static void main(String[] args){
+	public static void main(String[] args){
 		
 		new DrawImage();
 		
-	}*/
+	}
 }

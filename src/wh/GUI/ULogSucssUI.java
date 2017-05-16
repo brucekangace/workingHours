@@ -36,7 +36,7 @@ public class ULogSucssUI {
  			
  			
  			try {
- 				
+ 				WhaddUI whadd=new WhaddUI();
 				
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
@@ -52,7 +52,7 @@ public class ULogSucssUI {
  			
  			
  			try {
- 				
+ 				ExamineWhUI exam=new ExamineWhUI();
 				
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
@@ -133,9 +133,9 @@ public class ULogSucssUI {
     
     
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new ULogSucssUI();
-	}
+	}*/
 
 }

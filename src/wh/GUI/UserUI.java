@@ -456,7 +456,7 @@ public class UserUI extends JFrame{
 		Rectangle bounds=new Rectangle(sSize);
 		jpanel.setBounds(bounds);
 		jframe.setBounds(bounds);
-		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		/*la1.setText("工段选择:");
 		la2.setText("前置日期:");
 		la3.setText("后置日期:");*/
@@ -469,12 +469,12 @@ public class UserUI extends JFrame{
 	
 
 	
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 		try {
 			new UserUI();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 }

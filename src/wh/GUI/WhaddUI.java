@@ -263,7 +263,7 @@ public class WhaddUI {
 		jf.add(jp);
 		jf.setVisible(true);
         jf.setResizable(false);
-        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
     
     
@@ -300,7 +300,7 @@ public class WhaddUI {
 	
 	
 	
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 		new WhaddUI();
-	}
+	}*/
 }

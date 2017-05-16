@@ -55,7 +55,7 @@ public class ExamineWhUI {
 	jf.add(jp);
 	 jf.setVisible(true);
      //jf.setResizable(false);
-     jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    // jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	
