@@ -108,7 +108,144 @@ public class WhaddUI {
     jbadd.setFont(new Font("宋体",Font.BOLD,20));
     jbadd.setText("添加");
     jbadd.setBounds(icon.getIconWidth()/2, icon.getIconHeight()/6+(height*9), jtwidth, height);
-    jbadd.addActionListener(new jbaddHandler());
+    System.out.println("Action");  
+    
+	
+	
+	String ws=cws.getSelectedItem();
+	
+	add ad=new add();
+	boolean flag=false;
+	/*jtftid.addActionListener(new ActionListener(){
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			String tid=jtftid.getText();
+			try {
+				if(notfind(tid)==true){
+					JOptionPane.showMessageDialog(null,"图号有误","警告" , JOptionPane.INFORMATION_MESSAGE); 
+					}
+			} catch (HeadlessException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+	});
+	
+	
+	jtftnum.addActionListener(new ActionListener(){
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			String tid=jtftid.getText();
+			String tnum=jtftnum.getText();
+			try {
+				if(match(tid,tnum)!=true){
+					
+					JOptionPane.showMessageDialog(null, "图中没有此工序，请添加","警告" , JOptionPane.INFORMATION_MESSAGE);
+
+				
+				}
+			} catch (HeadlessException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+	});
+	
+	jtfnum.addActionListener(new ActionListener(){
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			String snum=jtfnum.getText();
+			int num=0;
+			if(isNumeric(snum)!=true){
+				JOptionPane.showMessageDialog(null, "请确数量是否正确", "警告", JOptionPane.INFORMATION_MESSAGE);
+		
+			}else{
+				num=Integer.valueOf(snum);
+			}
+		}
+		
+	});
+	
+	
+
+		
+		
+		
+    jbadd.addActionListener(new ActionListener() {  
+        
+        public void actionPerformed(ActionEvent e) {  
+        	String tid=jtftid.getText();
+			String tnum=jtftnum.getText();	
+        	String snum=jtfnum.getText();
+        	int num=Integer.valueOf(snum);
+    			ad.addcount(tid, tnum, num, ws); 
+				//JOptionPane.showMessageDialog(null, "成功", "添加成功！", JOptionPane.INFORMATION_MESSAGE); 
+				System.out.println("add 失败？-------------------------------"+flag);
+			
+        }  
+    }); */ 
+    jbadd.addActionListener(new ActionListener(){
+    	//添加事件
+		 public void actionPerformed(ActionEvent e){
+				
+					String tid=jtftid.getText();
+					String tnum=jtftnum.getText();
+					String snum=jtfnum.getText();
+					String ws=cws.getSelectedItem();
+					int num=0;
+					add ad=new add();
+					boolean flag=false;
+					try {
+						if(notfind(tid)==true){
+							//在管理表中找不到输入的图号
+						JOptionPane.showMessageDialog(null,"图号有误","警告" , JOptionPane.INFORMATION_MESSAGE); 
+						}else if(match(tid,tnum)!=true){
+							//图号中没有此工序
+							JOptionPane.showMessageDialog(null, "图中没有此工序，请添加","警告" , JOptionPane.INFORMATION_MESSAGE);
+						}else if(isNumeric(snum)==false){
+							JOptionPane.showMessageDialog(null, "请输入数量","警告" , JOptionPane.INFORMATION_MESSAGE);
+						}else if(isNumeric(snum)==true&&notfind(tid)==false&&match(tid,tnum)==true){
+							//输入全部正确
+							if(snum.equals("")){
+								snum="0";
+							}
+								num=Integer.valueOf(snum);
+							System.out.println("num+++++++++++"+num);
+							flag=ad.addcount(tid, tnum, num, ws);
+							String str="图号"+tid+"工序"+tnum+"数量"+snum+"工段"+ws;
+							JOptionPane.showMessageDialog(null, str, "添加成功", JOptionPane.INFORMATION_MESSAGE); 
+							jtftid.setText(null);
+							jtftnum.setText(null);
+							jtfnum.setText(null);
+							
+							
+						}else {
+							JOptionPane.showMessageDialog(null, "请核对输入数据", "警告", JOptionPane.INFORMATION_MESSAGE);
+						}
+					} catch (HeadlessException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+			}
+    });
 
 		
 		
@@ -160,38 +297,9 @@ public class WhaddUI {
 		   } 
 		   return true; 
 		}
-	 private class jbaddHandler implements ActionListener{
-			// TODO Auto-generated method stub
-			//添加事件
-		 public void actionPerformed(ActionEvent e){
-				try {
-					String tid=jtftid.getText();
-					String tnum=jtftnum.getText();
-					String snum=jtfnum.getText();
-					String ws=cws.getSelectedItem();
-					int num=0;
-					add ad=new add();
-					if(notfind(tid)==true){
-					JOptionPane.showMessageDialog(null,"图号有误","警告" , JOptionPane.INFORMATION_MESSAGE); 
-					} else if(isNumeric(snum)!=true){
-						JOptionPane.showMessageDialog(null, "请确数量是否正确", "警告", JOptionPane.INFORMATION_MESSAGE);
-					}else if(isNumeric(snum)!=true){
-						num=Integer.valueOf(snum);
-					}else if(match(tid,tnum)!=true){
-						
-						JOptionPane.showMessageDialog(null, "图中没有此工序，请添加","警告" , JOptionPane.INFORMATION_MESSAGE);
-					}else if(ad.addcount(tid, tnum, num, ws)==true){
-						JOptionPane.showMessageDialog(null, "成功", "添加成功！", JOptionPane.INFORMATION_MESSAGE); 
-						System.out.println("add success-------------------------------");
-					}else {
-						JOptionPane.showMessageDialog(null, "错误", "错误未知", JOptionPane.INFORMATION_MESSAGE); 
-					}
-				} catch (HeadlessException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-		}
-	 }
+	
+	
+	
 	public static void main(String[] args){
 		new WhaddUI();
 	}

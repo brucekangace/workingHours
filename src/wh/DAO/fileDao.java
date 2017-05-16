@@ -84,7 +84,7 @@ public class fileDao extends baseDao{
 		ps.setString(7, workSection);
 		ps.setDate(8, new Date(System.currentTimeMillis()));
 		int count=ps.executeUpdate();
-		while(count!=0){
+		if(count!=0){
 			flag=true;
 		}
 		close();
