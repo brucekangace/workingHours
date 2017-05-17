@@ -3,7 +3,9 @@ package wh.GUI;
 import java.awt.BorderLayout;
 import java.awt.Choice;
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Dimension;
+import java.awt.FileDialog;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Rectangle;
@@ -12,6 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -31,7 +35,13 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 
+import jxl.Workbook;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
 import wh.VO.CTable;
+import wh.module.ExcelExporter;
 import wh.module.GetCount;
 
 public class UserUI extends JFrame{
@@ -48,7 +58,7 @@ public class UserUI extends JFrame{
 	 JLabel la2m=new JLabel("月");
 	 JLabel la2d=new JLabel("日");
 	 JLabel ja=new JLabel("总计：");
-	 
+	 JButton expt=new JButton("导出为Excel");
 	private Choice wsc=new Choice();
 	private Choice date1y=new Choice();
 	private Choice date1m=new Choice();
@@ -147,6 +157,8 @@ public class UserUI extends JFrame{
 		ja.setBounds(x+1080, 15, 300, 50);
 		ja.setFont(new Font("宋体",Font.BOLD,20));
 		
+		expt.setBounds(x+1280, 15, 150, 50);
+		expt.setBackground(Color.white);
 		/*
 		JTableHeader header=jt.getTableHeader();
 		header.setFont(new Font("宋体",Font.BOLD,20));
@@ -176,6 +188,25 @@ public class UserUI extends JFrame{
 				// TODO Auto-generated method stub
 				
 					
+			}
+			
+		});
+		
+		expt.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				  
+                 try {
+                	 ExcelExporter exp = new ExcelExporter(); 
+					exp.exportTable(jt, new File("results.xls"));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+				
 			}
 			
 		});
@@ -431,6 +462,7 @@ public class UserUI extends JFrame{
 		jpanel.add(la2d);
 		jpanel.add(sButton);
 		jpanel.add(ja);
+		jpanel.add(expt);
 		jpanel.setBorder(new LineBorder(Color.black));
 		 jpanel.setPreferredSize(new Dimension(jpwidth, 75));
 		 
@@ -469,12 +501,12 @@ public class UserUI extends JFrame{
 	
 
 	
-	/*public static void main(String[] args){
+	public static void main(String[] args){
 		try {
 			new UserUI();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}*/
+	}
 }
