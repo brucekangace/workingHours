@@ -481,6 +481,8 @@ public class UserUI extends JFrame{
 		jframe.add(jpanel,BorderLayout.NORTH);
 		jframe.add(jpanel2,BorderLayout.SOUTH);
 		// jframe.setBackground(Color.black);    
+		jframe.getContentPane().setBackground(new Color(0,88,122)); 
+		jframe.getContentPane().setVisible(true  );
 		jframe.setVisible(true);
 		jframe.setLayout(new FlowLayout());
 		//jframe.setUndecorated(false);
