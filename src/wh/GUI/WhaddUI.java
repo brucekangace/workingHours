@@ -300,7 +300,7 @@ public class WhaddUI {
 	
 	
 	
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 		new WhaddUI();
-	}
+	}*/
 }

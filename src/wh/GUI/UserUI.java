@@ -27,6 +27,7 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -202,6 +203,7 @@ public class UserUI extends JFrame{
                  try {
                 	 ExcelExporter exp = new ExcelExporter(); 
 					exp.exportTable(jt, new File("results.xls"));
+					JOptionPane.showMessageDialog(null,"导出成功","通知" , JOptionPane.INFORMATION_MESSAGE); 
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -486,7 +488,7 @@ public class UserUI extends JFrame{
 		jframe.setVisible(true);
 		jframe.setLayout(new FlowLayout());
 		//jframe.setUndecorated(false);
-		;
+		
 		Rectangle bounds=new Rectangle(sSize);
 		jpanel.setBounds(bounds);
 		jframe.setBounds(bounds);
