@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Thu May 18 10:00:36 CST 2017
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=workingHours_fat.jar
+manifest.mergeall=true
+manifest.mainclass=wh.GUI.DrawImage
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=
